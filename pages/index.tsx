@@ -29,7 +29,7 @@ export default function Home() {
     setRestaurantList(data)
   }
 
-  const onRestaurantClick = (restaurantInfo:any) => {
+  const onRestaurantClick = (restaurantInfo: any) => {
     console.log("restaurantinfo", restaurantInfo)
     setClickedRestaurants(restaurantInfo)
   }
@@ -51,7 +51,7 @@ export default function Home() {
       margin: '10px',
       display: 'flex',
       flexDirection: 'column',
-      gap:'5px'
+      gap: '5px'
     }}>
       <Card restaurantList={restaurantList} onRestaurantClick={onRestaurantClick}
         clickedRestaurants={clickedRestaurants}
@@ -64,8 +64,23 @@ function Card({ restaurantList, onRestaurantClick, clickedRestaurants }: {
   restaurantList: any, onRestaurantClick: any, clickedRestaurants: any
 }) {
 
-  const onQuestionMarkClick = (foodName: any) => {
-    console.log("Food Name", foodName)
+  const onQuestionMarkClick = async (foodName: any) => {
+    console.log("foodName", foodName)
+    const response = await fetch('http://localhost:3000/api/cohere',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          foodName,
+        })
+      }
+    )
+    const result = await response.json()
+      console.log("result", result)
+    alert(result.result)
+
   }
   return (
     <>
@@ -79,7 +94,7 @@ function Card({ restaurantList, onRestaurantClick, clickedRestaurants }: {
                   return (
                     <div className="btnContainer">
 
-                    <button key={food} onClick={() => onQuestionMarkClick(food)}> {food} </button>
+                      <button key={food} onClick={() => onQuestionMarkClick(food)}> {food} </button>
                     </div>)
                 })
               }
