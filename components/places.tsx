@@ -27,7 +27,7 @@ export default function Places({ setOffice }: PlacesProps) {
   const handleSelect = async (val: string) => {
     setValue(val, false);
     clearSuggestions();
-
+    
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
     setOffice({ lat, lng });

@@ -1,4 +1,6 @@
-html,
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+
 body {
   padding: 0;
   margin: 0;
@@ -49,4 +51,36 @@ a {
 .combobox-input {
   width: 100%;
   padding: 0.5rem;
+}
+.foodsCard{
+  background-color: aliceblue;
+  border-radius: 5px;
+  border: 1px solid #111;
+  cursor: pointer;
+}
+.foodsCard h2{
+  text-align: left;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #111;
+}
+.foodsCard button{
+  min-width: 50px;
+  max-height: 30px;
+  border-radius: 5px;
+  border: 1px solid #111;
+  background-color: transparent;
+  color: #111;
+  font-size: 1.2rem;
+}
+
+.foodsCard button:hover{
+  background-color: #ccc;
+  color: #111;
+}
+.btnContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+
 }

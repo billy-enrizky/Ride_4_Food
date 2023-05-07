@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import {
   GoogleMap,
   Marker,
@@ -13,14 +13,29 @@ type LatLngLiteral = google.maps.LatLngLiteral;
 type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
 
-export default function Map() {
+export default function Map({
+  lat: latitudeData,
+  long: longitudeData,
+}: {
+  lat: LatLngLiteral,
+  long: LatLngLiteral,
+}) {
   const [office, setOffice] = useState<LatLngLiteral>();
   const [directions, setDirections] = useState<DirectionsResult>();
   const mapRef = useRef<GoogleMap>();
+
   const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 43.45, lng: -80.49 }),
+    () => ({ lat: 43.45, lng: -80.49 },
+      { lat: 41.88, lng: -87.63 },
+      { lat: 43.6532, lng: -79.3832 }),
     []
   );
+
+  useEffect(() => {
+    console.log("ash", latitudeData, longitudeData)
+    !!latitudeData && !!longitudeData && setOffice({ lat: latitudeData, lng: longitudeData } as any);
+  }, [latitudeData, longitudeData]);
+
   const options = useMemo<MapOptions>(
     () => ({
       mapId: "b181cac70f27f5e6",
@@ -53,9 +68,10 @@ export default function Map() {
   return (
     <div className="container">
       <div className="controls">
-        <h1>Commute?</h1>
+        <h1>Ride4Food</h1>
         <Places
           setOffice={(position) => {
+            console.log("is running")
             setOffice(position);
             mapRef.current?.panTo(position);
           }}
@@ -92,7 +108,6 @@ export default function Map() {
                 position={office}
                 icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
               />
-
               <MarkerClusterer>
                 {(clusterer) =>
                   houses.map((house) => (
@@ -107,10 +122,9 @@ export default function Map() {
                   ))
                 }
               </MarkerClusterer>
-
-              <Circle center={office} radius={15000} options={closeOptions} />
+              {/* <Circle center={office} radius={15000} options={closeOptions} />
               <Circle center={office} radius={30000} options={middleOptions} />
-              <Circle center={office} radius={45000} options={farOptions} />
+              <Circle center={office} radius={45000} options={farOptions} /> */}
             </>
           )}
         </GoogleMap>
