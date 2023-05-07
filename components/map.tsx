@@ -25,7 +25,7 @@ export default function Map({
   const mapRef = useRef<GoogleMap>();
 
   const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 43.45, lng: -80.49 },
+    () => ({ lat: 43.761539, lng:-79.411079 },
       { lat: 41.88, lng: -87.63 },
       { lat: 43.6532, lng: -79.3832 }),
     []
@@ -166,10 +166,10 @@ const farOptions = {
 const generateHouses = (position: LatLngLiteral) => {
   const _houses: Array<LatLngLiteral> = [];
   for (let i = 0; i < 100; i++) {
-    const direction = Math.random() < 0.5 ? -2 : 2;
+    const direction = Math.random() < 0.5 ? -2 : 2  ;
     _houses.push({
-      lat: position.lat + Math.random() / direction,
-      lng: position.lng + Math.random() / direction,
+      lat: position.lat - Math.random() / direction + .2,
+      lng: position.lng - Math.random() / direction - .2,
     });
   }
   return _houses;
