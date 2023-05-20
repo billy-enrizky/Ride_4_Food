@@ -43,7 +43,7 @@ export default function Places({ setOffice }: PlacesProps) {
         style={{
           color:"#111"
         }}
-        placeholder="Search office address"
+        placeholder="Search Homeless Shelter address"
       />
       <ComboboxPopover>
         <ComboboxList>

@@ -25,9 +25,7 @@ export default function Map({
   const mapRef = useRef<GoogleMap>();
 
   const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 43.761539, lng:-79.411079 },
-      { lat: 41.88, lng: -87.63 },
-      { lat: 43.6532, lng: -79.3832 }),
+    () => ({ lat: 43.761539, lng:-79.411079 }),
     []
   );
 
@@ -78,7 +76,7 @@ export default function Map({
         />
         {!office && <p style={{
           color: "#fff",
-        }}>Enter the address of your office.</p>}
+        }}>Enter the address of the Homeless Shelter.</p>}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
       <div className="map">
@@ -122,9 +120,7 @@ export default function Map({
                   ))
                 }
               </MarkerClusterer>
-              {/* <Circle center={office} radius={15000} options={closeOptions} />
-              <Circle center={office} radius={30000} options={middleOptions} />
-              <Circle center={office} radius={45000} options={farOptions} /> */}
+
             </>
           )}
         </GoogleMap>
